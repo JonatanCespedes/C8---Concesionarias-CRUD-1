@@ -1,15 +1,10 @@
-let dataBase = require('../data/dataBase')
+let { getAutos } =require('../data/dataBase')
 
 module.exports = {
     index: (req, res) => {
-        let autos = [];
-
-        dataBase.forEach(sucursal => {
-            sucursal.autos.forEach(auto => {
-                autos.push(auto)
-            })
-        });
-        res.send(autos)
+      res.render('autos', {
+          autos : getAutos
+      })
     },
     marca: (req, res) => {
         let paramsMarca = req.params.marca.trim(); //Capturo la marca solicitada

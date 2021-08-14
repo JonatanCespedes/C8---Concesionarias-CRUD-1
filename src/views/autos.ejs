@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-    <%- include('./partials/head.ejs')  %> 
+    <%- include('./partials/head.ejs') %>
 <body>
-    <%- include('./partials/header.ejs')  %> 
+    <%- include('./partials/header.ejs') %>
     <main class="container">
-        <h2 class="text-center">Sucursal: <%= sucursal.nombre  %> </h2>
-        <p>Direccion: <%= sucursal.direccion %></p>
-        <p>Teléfono: <%= sucursal.telefono %></p>
-        <p>Cantidad de autos: <%= autos.length %></p>
-    
-        <h3 class="text-center">Autos disponibles en nuestra sucursal</h3>
-    
+        <h3 class="text-center">Todos nuestros autos</h3>
+
         <div class="container d-flex flex-wrap justify-content-center">
             <% autos.forEach( auto => { %>
                 <div class="card m-2 text-white bg-dark" style="width: 16rem;">
@@ -20,14 +15,15 @@
                       <p class="card-text">Modelo: <%= auto.modelo %></p>
                       <p class="card-text">Año: <%= auto.anio %></p>
                       <p class="card-text">Color: <%= auto.color %></p>
+                      <p class="card-text">Sucursal: <%= auto.sucursal %></p>
                       <a href="/autos/detalle/<%- auto.id %>" class="btn btn-primary">Detalle</a>
                     </div>
                 </div>
             <% }) %>
         </div>
+
     </main>
-   
-    <%- include('./partials/scripts.ejs')  %> 
-    <%- include('./partials/footer.ejs')  %> 
+    <%- include('./partials/scripts.ejs') %>
+    <%- include('./partials/footer.ejs') %>
 </body>
 </html>
