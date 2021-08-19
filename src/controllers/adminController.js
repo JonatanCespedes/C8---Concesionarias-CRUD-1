@@ -1,0 +1,1 @@
+const { getSucursales } = require('../data/dataBase')

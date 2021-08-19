@@ -6,44 +6,13 @@ module.exports = {
           autos : getAutos
       })
     },
-    marca: (req, res) => {
-        let paramsMarca = req.params.marca.trim(); //Capturo la marca solicitada
-        
-        let autos = [];
-
-        dataBase.forEach(sucursal => {
-            sucursal.autos.forEach(auto => {
-               if(auto.marca.toLowerCase() === paramsMarca.toLowerCase()){
-                   autos.push(auto)
-               }
-            })
-        });
-
-        res.send(autos)
-    },
-    dato: (req, res) => {
-        let paramsMarca = req.params.marca.trim();
-        let paramsDato = req.params.dato.trim();
-
-        let autosFiltradosPorMarca = [];
-
-        dataBase.forEach(sucursal => {
-            sucursal.autos.forEach(auto => {
-               if(auto.marca.toLowerCase() === paramsMarca.toLowerCase()){
-                    autosFiltradosPorMarca.push(auto)
-               }
-            })
-        });
-
-        let autosFiltradosPorDato = autosFiltradosPorMarca.filter(auto => {
-            return auto.anio == paramsDato || auto.color.toLowerCase() === paramsDato.toLowerCase() 
+    detail: (req, res) => {
+        let auto = getAutos.find(auto => { //Busco el auto que coincida con el id que viene por parámetro
+            return auto.id === +req.params.id
         })
-
-        if(autosFiltradosPorDato.length > 0){
-            res.send(autosFiltradosPorDato)
-        }else {
-            res.send("No hay datos que coincida con tu busqueda")
-        }
-
+        res.render('autoDetail', {
+            auto
+        })
     }
+   
 }
