@@ -40,4 +40,40 @@ module.exports = {
 
         res.redirect('/admin/sucursales')
     },
+    editarSucursal: (req, res) => {
+        let sucursal = getSucursales.find(sucursal => {
+            return sucursal.id === +req.params.id
+        })
+
+        res.render('admin/editarSucursal', {
+            sucursal
+        })
+    },
+    actualizarSucursal: (req, res) => {
+        getSucursales.forEach(sucursal => {
+            if(sucursal.id === +req.params.id){
+                sucursal.id = sucursal.id,
+                sucursal.nombre = req.body.nombre ? req.body.nombre : sucursal.nombre,
+                sucursal.direccion = req.body.direccion ? req.body.direccion : sucursal.direccion, 
+                sucursal.telefono = req.body.telefono ? req.body.telefono : sucursal.telefono, 
+                sucursal.image = sucursal.image           
+            }
+        })
+
+        writeJson(getSucursales)
+
+        res.redirect('/admin/sucursales')
+    },
+    eliminarSucursal: (req, res) => {
+        getSucursales.forEach(sucursal => {
+            if(sucursal.id === +req.params.id){
+                let sucursalAEliminar = getSucursales.indexOf(sucursal)
+                getSucursales.splice(sucursalAEliminar, 1)
+            }
+        })
+
+        writeJson(getSucursales)
+
+        res.redirect('/admin/sucursales')
+    },
 }

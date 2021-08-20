@@ -1,6 +1,7 @@
 let express = require('express');
 let app = express();
 let path = require('path');
+let methodOverride = require('method-override')
 
 /* Enrutadores */
 let homeRouter = require('./routes/home');
@@ -16,6 +17,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended : false }));
 app.use(express.json())
+app.use(methodOverride('_method'));
 
 /* RUTAS */
 app.use('/', homeRouter);
